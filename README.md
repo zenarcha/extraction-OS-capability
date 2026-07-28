@@ -1,8 +1,8 @@
 # AI Information Extraction Template
 
-Build production-ready AI information extraction capabilities using reusable engineering patterns.
+Build production-ready AI information extraction capabilities using a structured, approval-gated engineering workflow.
 
-This repository helps you convert unstructured documents into reliable, structured, validated data using modern LLMs.
+This repository helps you transform unstructured documents into reliable, validated, structured data using modern LLMs and reusable engineering patterns.
 
 Typical use cases include:
 
@@ -13,85 +13,157 @@ Typical use cases include:
 - Customer support tickets
 - Research papers
 - Product catalogues
+- Medical records
+- Financial documents
 - Any unstructured document that needs to become structured data
 
 ---
 
-# How to Use
+# Getting Started
 
 Describe the extraction problem you want to solve.
 
-For example:
+Examples:
 
 - I want to extract structured information from job descriptions.
 - I need to extract invoice data into JSON.
 - I want to classify customer support tickets.
 - I want to extract entities from legal contracts.
+- I need to build a reusable resume parser.
 
 You do **not** need to:
 
 - Design prompts
 - Design schemas
-- Choose an extraction technique
+- Decide which fields to extract
 - Define validation rules
-- Decide on an implementation approach
+- Choose an extraction technique
+- Select an implementation approach
 
-The AI will guide you through the engineering workflow.
+The AI will guide you through the complete engineering workflow.
+
+---
+
+# Approval-Gated Workflow
+
+This repository follows an approval-gated engineering workflow.
+
+Rather than generating an implementation immediately, the AI works through each engineering phase in sequence.
+
+For every phase it will:
+
+- Complete only the current phase.
+- Present the deliverable.
+- Wait for your approval.
+- Continue only after approval.
+
+This ensures implementation decisions are not made before the requirements have been fully understood.
 
 ---
 
 # Engineering Workflow
 
-Every extraction project follows the same workflow.
+Every extraction capability follows the same workflow.
 
 ```text
-Problem
-      ↓
-Understand Requirements
-      ↓
+Understand the Problem
+          ↓
 Extraction Task Specification
-      ↓
+          ↓
 Extraction Contract
-      ↓
+          ↓
+Implementation Scope
+          ↓
+Extraction Design
+          ↓
+Implementation Approach
+          ↓
 Implementation
-      ↓
+          ↓
+Failure Design
+          ↓
 Testing
-      ↓
+          ↓
 Evaluation
-      ↓
+          ↓
 Production
 ```
 
-During this process the AI will help you:
+Each phase has:
 
-1. Understand the problem and gather requirements.
-2. Create an Extraction Task Specification.
-3. Design an Extraction Contract.
-4. Recommend the most appropriate implementation approach.
-5. Build the extraction capability.
-6. Test and evaluate the implementation.
-7. Prepare it for production.
+- A single objective
+- A single deliverable
+- An approval checkpoint
 
-Each phase is completed before moving to the next.
+The AI never skips phases or combines multiple phases into one response.
+
+---
+
+# Workflow Overview
+
+| Phase | Purpose |
+|--------|---------|
+| Understand the Problem | Discover and validate the user's requirements. |
+| Extraction Task Specification | Document the approved business requirements. |
+| Extraction Contract | Define **what** information should be extracted. |
+| Implementation Scope | Agree what will be built. |
+| Extraction Design | Define **how** the extraction contract will be represented. |
+| Implementation Approach | Select the most appropriate extraction technique. |
+| Implementation | Build the extraction capability. |
+| Failure Design | Design handling for invalid or incomplete outputs. |
+| Testing | Verify correctness and reliability. |
+| Evaluation | Measure extraction quality and regressions. |
+| Production | Prepare the extraction capability for deployment. |
+
+---
+
+# How the AI Works
+
+During the workflow the AI will:
+
+1. Understand your requirements.
+2. Ask clarification questions only when information is genuinely missing.
+3. Avoid making assumptions.
+4. Keep implementation decisions out of early phases.
+5. Build the extraction capability using the documented engineering rules.
+6. Test and evaluate the implementation before considering it complete.
 
 ---
 
 # Repository Structure
 
 ```text
-    extraction workflow.md
+README.md
+
+Extraction Engineering Guide.md
 
 rules/
     ...
 ```
 
-## `extraction workflow`
+## Extraction Engineering Guide
 
-Contains the end-to-end engineering workflow the AI follows when building an extraction capability.
+Defines the approval-gated engineering workflow used for every extraction capability.
 
-## `rules/`
+It explains:
 
-Contains the detailed engineering guidance, implementation standards and best practices used throughout the project.
+- The engineering phases
+- Approval checkpoints
+- Responsibilities of each phase
+- Deliverables
+- Workflow rules
+
+## rules/
+
+Contains the engineering guidance used throughout implementation, including:
+
+- Prompt engineering
+- Structured outputs
+- Schema design
+- Validation
+- Testing
+- Evaluation
+- Production best practices
 
 ---
 
@@ -99,19 +171,15 @@ Contains the detailed engineering guidance, implementation standards and best pr
 
 | Document | Purpose |
 |----------|---------|
-| `extraction workflow.md` | End-to-end extraction engineering workflow |
-| `rules/` | Detailed engineering guidance and implementation standards |
+| `Extraction Engineering Guide.md` | Defines the end-to-end extraction engineering workflow. |
+| `rules/` | Engineering guidance, implementation standards and best practices. |
 
 ---
 
 # Source of Truth
 
-The AI follows the workflow documented in:
+The AI follows the workflow defined in the **Extraction Engineering Guide**.
 
-`docs/extraction workflow.md`
+Engineering decisions are guided by the documents in `rules/`.
 
-Implementation decisions are guided by the documents in:
-
-`rules/`
-
-If the engineering guide conflicts with a documented engineering rule, the documented engineering rule takes precedence.
+If the Engineering Guide conflicts with a documented engineering rule, the documented engineering rule takes precedence.
