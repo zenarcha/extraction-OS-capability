@@ -71,19 +71,20 @@ Examples include:
 If these decisions cannot be inferred, ask for clarification before proceeding.
 
 ---
-
 ## 2. Design the Extraction
 
 Before writing prompts or code, determine:
 
 - What is the input?
+- How will the extracted information be used downstream?
+- What decisions or workflows will consume the extracted data?
 - What is the required structured output?
 - What should the output schema look like?
 - Which fields are required?
 - Which fields are optional?
 - Which engineering rules apply?
 
-The schema is the contract between the model and the application.
+The extraction schema is the contract between the model and the application. Design it to support downstream requirements rather than the source document alone.
 
 ---
 
