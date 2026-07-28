@@ -49,8 +49,6 @@ Complete the current phase before moving to the next.
 
 Do not merge phases or skip approval steps, even if you believe you have enough information to continue.
 
-I think that's a better fix because it addresses the real behavior you're seeing: Claude
-
 ---
 
 # 1. Understand the Problem
