@@ -28,12 +28,16 @@ Build extraction systems that are:
 
 # Project Conventions
 
-Unless the task specifies otherwise:
+These conventions apply to every extraction project unless the user explicitly overrides them.
+
+Assume these defaults:
 
 - Build extraction modules to be provider-agnostic.
 - Use Instructor's `from_provider()`.
 - Make the provider configurable.
 - Do not hardcode a provider.
+
+Do not ask the user to confirm these conventions unless they conflict with the project requirements.
 
 ---
 
@@ -69,7 +73,7 @@ For every phase:
 
 Approval must come from the user in a separate message.
 
-Labelling a phase as "pending approval", "proposal", or "needs approval" does **not** count as approval.
+Labelling a phase as **"proposal"**, **"pending approval"**, or **"needs approval"** does not count as approval.
 
 If your execution environment encourages producing a complete implementation plan, this workflow takes precedence.
 
@@ -81,7 +85,11 @@ Do not combine phases or approval checkpoints.
 
 Before designing a solution, understand what the user is trying to accomplish.
 
-Do **not** assume the extraction task, schema or implementation approach.
+Do **not** assume:
+
+- The extraction task
+- The extraction schema
+- The implementation approach
 
 If the requirements are unclear, ask clarifying questions.
 
@@ -93,7 +101,7 @@ Understand:
 - What documents or data will be processed?
 - How will the extracted information be used?
 - Who or what will consume the extracted data?
-- Are there any known technical or business constraints?
+- Are there any known business or technical constraints?
 
 The user does **not** need to provide:
 
@@ -141,17 +149,26 @@ The specification should define:
 
 ## Project Constraints
 
-Document known project constraints that affect implementation, such as:
+Document known **business or project constraints** that influence the extraction capability.
+
+Examples include:
 
 - Regulatory requirements
 - Compliance requirements
+- Privacy requirements
 - Performance requirements
 - Deployment constraints
-- Provider requirements
 
-Do **not** make schema or data modelling decisions during this phase.
+Do **not** ask about implementation technologies during this phase unless the user has already specified them.
 
-Those decisions belong in the Extraction Contract and Design phases.
+Do **not** make:
+
+- Schema decisions
+- Data modelling decisions
+- Provider decisions
+- Implementation decisions
+
+These belong in later phases.
 
 Present the Extraction Task Specification to the user for review.
 
@@ -171,18 +188,17 @@ Using the approved Extraction Task Specification:
 
 The Extraction Contract defines **what** information should be extracted.
 
-Do **not** decide **how** the data will be represented in code during this phase.
-
-Schema design, data types, enums, nested models and validation implementations belong to the Design phase.
+It does **not** define how that information will be represented in code.
 
 Recommend:
 
-- The information to extract.
-- Why each field is required.
-- Required and optional fields.
-- Validation rules.
-- The extraction scope.
-- An example structured output.
+- The information to extract
+- Why each field is required
+- Required fields
+- Optional fields
+- Validation requirements
+- The extraction scope
+- An example structured output
 
 The Extraction Contract is a proposal.
 
@@ -190,11 +206,26 @@ Present it to the user for review.
 
 Ask the user to:
 
-- Add fields.
-- Remove fields.
-- Rename fields.
-- Modify validation rules.
-- Confirm the extraction scope.
+- Add fields
+- Remove fields
+- Rename fields
+- Modify validation rules
+- Confirm the extraction scope
+
+Do **not** make schema decisions during this phase.
+
+Do **not** define:
+
+- Data types
+- Enums
+- Nested models
+- Pydantic models
+- Currency representation
+- Locale handling
+- Tax modelling
+- Provider-specific implementation
+
+Those decisions belong in the Design phase.
 
 End your response after presenting this phase.
 
@@ -226,12 +257,15 @@ Examples include:
 - MVP
 - Production-ready implementation
 
-Clarify implementation decisions that affect the build, such as:
+Clarify implementation decisions such as:
 
 - Target LLM provider
+- Provider-specific requirements
+- Deployment environment
 - Testing strategy
 - Evaluation strategy
-- Deployment constraints
+
+If the project conventions already define a default implementation, use those defaults unless the user explicitly requests otherwise.
 
 Only continue once the implementation scope has been agreed.
 
@@ -241,15 +275,20 @@ Only continue once the implementation scope has been agreed.
 
 Before writing implementation code:
 
-- Review the approved Extraction Task Specification.
-- Review the approved Extraction Contract.
-- Review the agreed implementation scope.
-- Determine the input format.
-- Determine the expected structured output.
-- Identify downstream workflows.
-- Identify the applicable engineering rules.
+Review:
 
-During this phase, determine **how** the approved Extraction Contract will be represented.
+- The approved Extraction Task Specification
+- The approved Extraction Contract
+- The agreed Implementation Scope
+
+Determine:
+
+- Input format
+- Expected structured output
+- Downstream workflows
+- Applicable engineering rules
+
+During this phase determine **how** the approved Extraction Contract will be represented.
 
 Examples include:
 
