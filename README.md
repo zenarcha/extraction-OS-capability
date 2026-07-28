@@ -100,7 +100,7 @@ Contains the detailed engineering guidance, implementation standards and best pr
 
 | Document | Purpose |
 |----------|---------|
-| `extraction-engineering-guide.md` | End-to-end extraction engineering workflow |
+| `extraction workflow.md` | End-to-end extraction engineering workflow |
 | `rules/` | Detailed engineering guidance and implementation standards |
 
 ---
