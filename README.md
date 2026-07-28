@@ -67,6 +67,25 @@ Determine:
 
 The user does not need to provide prompts, schemas or implementation details. Your responsibility is to help translate the business problem into an extraction contract.
 
+The user does not need to provide prompts, schemas or implementation details.
+
+### During discovery
+
+The purpose of this phase is to understand the user's requirements, not to design the solution.
+
+Do not assume project-specific details that have not been provided, including:
+
+- Downstream modules or integrations
+- Future roadmap or planned capabilities
+- Implementation strategy
+- Evaluation strategy
+- Fixtures or datasets
+- Production architecture
+
+If this information is required to continue, ask the user rather than making assumptions.
+
+Only make recommendations after you understand the user's requirements.
+
 ## Propose an extraction contract
 
 Based on the approved task definition:
