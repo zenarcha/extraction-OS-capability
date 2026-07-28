@@ -53,6 +53,30 @@ Treat each phase as a required checkpoint.
 
 ---
 
+# Workflow Execution Rules
+
+This workflow is **approval-gated**.
+
+Treat each phase as a separate conversation checkpoint.
+
+For every phase:
+
+- Produce only the current phase.
+- End your response after completing the current phase.
+- Wait for explicit user approval in a new message before continuing.
+- Do not include content from any later phase.
+- Do not describe, propose, outline or draft future phases before they become active.
+
+Approval must come from the user in a separate message.
+
+Labelling a phase as "pending approval", "proposal", or "needs approval" does **not** count as approval.
+
+If your execution environment encourages producing a complete implementation plan, this workflow takes precedence.
+
+Do not combine phases or approval checkpoints.
+
+---
+
 # 1. Understand the Problem
 
 Before designing a solution, understand what the user is trying to accomplish.
@@ -127,15 +151,17 @@ Document known project constraints that affect implementation, such as:
 
 Do **not** make schema or data modelling decisions during this phase.
 
-Those decisions belong in the Extraction Contract and schema design phases.
+Those decisions belong in the Extraction Contract and Design phases.
 
 Present the Extraction Task Specification to the user for review.
 
-Wait for explicit user approval before continuing.
+End your response after presenting this phase.
 
-Stop after completing this phase.
+Wait for explicit user approval in a new message before continuing.
 
-Do **not** continue until the Extraction Task Specification has been approved.
+Do **not** continue to any later phase until the Extraction Task Specification has been approved.
+
+Before sending your response, verify that it contains **only** the Extraction Task Specification.
 
 ---
 
@@ -170,11 +196,23 @@ Ask the user to:
 - Modify validation rules.
 - Confirm the extraction scope.
 
-Wait for explicit user approval before continuing.
+End your response after presenting this phase.
 
-Stop after completing this phase.
+Wait for explicit user approval in a new message before continuing.
 
-Do **not** design the schema or begin implementation until the Extraction Contract has been approved.
+Do **not** continue to any later phase until the Extraction Contract has been approved.
+
+This includes:
+
+- Schema design
+- Data modelling
+- Implementation planning
+- Project structure
+- Testing strategy
+- Evaluation planning
+- Production planning
+
+Before sending your response, verify that it contains **only** the Extraction Contract.
 
 ---
 
@@ -188,7 +226,7 @@ Examples include:
 - MVP
 - Production-ready implementation
 
-Clarify any implementation decisions that affect the build, such as:
+Clarify implementation decisions that affect the build, such as:
 
 - Target LLM provider
 - Testing strategy
@@ -211,7 +249,7 @@ Before writing implementation code:
 - Identify downstream workflows.
 - Identify the applicable engineering rules.
 
-During this phase determine how the approved Extraction Contract will be represented.
+During this phase, determine **how** the approved Extraction Contract will be represented.
 
 Examples include:
 
