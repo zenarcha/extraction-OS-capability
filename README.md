@@ -39,14 +39,45 @@ You do **not** need to:
 - Define validation rules
 - Choose an extraction technique
 - Select an implementation approach
+- Provide sample documents immediately
 
 The AI will guide you through the complete engineering workflow.
 
 ---
 
+# Representative Documents
+
+To design a robust extraction capability, the AI may request representative documents during the workflow.
+
+Representative documents help identify:
+
+- Common fields
+- Optional fields
+- Structural variations
+- Validation requirements
+- Edge cases
+
+Recommended number of examples:
+
+- **Minimum:** 3 representative documents
+- **Recommended:** 5–10 representative documents
+- **Complex or highly variable document types:** 10–20 representative documents
+
+Where possible, provide documents that represent the range of inputs your extraction system will process, including:
+
+- Different layouts or templates
+- Documents from different sources
+- Optional or missing fields
+- Realistic production examples
+- Edge cases
+
+The AI will request these documents when they are needed. You do not need to provide them before starting the workflow.
+
+---
+
 # Approval-Gated Workflow
 
-This repository follows an approval-gated engineering workflow.
+Every extraction project follows an approval-gated engineering workflow.
 
 Rather than generating an implementation immediately, the AI works through each engineering phase in sequence.
 
@@ -57,13 +88,11 @@ For every phase it will:
 - Wait for your approval.
 - Continue only after approval.
 
-This ensures implementation decisions are not made before the requirements have been fully understood.
+This prevents implementation decisions from being made before the requirements have been fully understood.
 
 ---
 
 # Engineering Workflow
-
-Every extraction capability follows the same workflow.
 
 ```text
 Understand the Problem
@@ -95,7 +124,7 @@ Each phase has:
 - A single deliverable
 - An approval checkpoint
 
-The AI never skips phases or combines multiple phases into one response.
+The AI may request clarification or representative documents when they are required to complete the current phase.
 
 ---
 
@@ -103,16 +132,16 @@ The AI never skips phases or combines multiple phases into one response.
 
 | Phase | Purpose |
 |--------|---------|
-| Understand the Problem | Discover and validate the user's requirements. |
-| Extraction Task Specification | Document the approved business requirements. |
-| Extraction Contract | Define **what** information should be extracted. |
+| Understand the Problem | Discover and validate the business requirements. |
+| Extraction Task Specification | Document the approved requirements. |
+| Extraction Contract | Define what information should be extracted. |
 | Implementation Scope | Agree what will be built. |
-| Extraction Design | Define **how** the extraction contract will be represented. |
-| Implementation Approach | Select the most appropriate extraction technique. |
+| Extraction Design | Decide how the extraction contract will be represented. |
+| Implementation Approach | Select the most appropriate implementation technique. |
 | Implementation | Build the extraction capability. |
-| Failure Design | Design handling for invalid or incomplete outputs. |
-| Testing | Verify correctness and reliability. |
-| Evaluation | Measure extraction quality and regressions. |
+| Failure Design | Handle invalid, incomplete and unexpected inputs. |
+| Testing | Verify correctness, validation and reliability. |
+| Evaluation | Measure extraction quality and detect regressions. |
 | Production | Prepare the extraction capability for deployment. |
 
 ---
@@ -121,12 +150,14 @@ The AI never skips phases or combines multiple phases into one response.
 
 During the workflow the AI will:
 
-1. Understand your requirements.
-2. Ask clarification questions only when information is genuinely missing.
-3. Avoid making assumptions.
-4. Keep implementation decisions out of early phases.
-5. Build the extraction capability using the documented engineering rules.
-6. Test and evaluate the implementation before considering it complete.
+1. Understand your business problem.
+2. Use the information you've already provided before asking questions.
+3. Ask clarification questions only when information is genuinely missing.
+4. Request representative documents when they are needed to design the extraction capability.
+5. Avoid making assumptions.
+6. Keep implementation decisions out of the early phases.
+7. Build the extraction capability using the documented engineering rules.
+8. Test and evaluate the implementation before considering it complete.
 
 ---
 
@@ -143,13 +174,11 @@ rules/
 
 ## Extraction Engineering Guide
 
-Defines the approval-gated engineering workflow used for every extraction capability.
+Defines the approval-gated engineering workflow used for every extraction capability, including:
 
-It explains:
-
-- The engineering phases
+- Engineering phases
 - Approval checkpoints
-- Responsibilities of each phase
+- Responsibilities
 - Deliverables
 - Workflow rules
 
@@ -180,6 +209,6 @@ Contains the engineering guidance used throughout implementation, including:
 
 The AI follows the workflow defined in the **Extraction Engineering Guide**.
 
-Engineering decisions are guided by the documents in `rules/`.
+Engineering and implementation decisions are guided by the documents in `rules/`.
 
 If the Engineering Guide conflicts with a documented engineering rule, the documented engineering rule takes precedence.
