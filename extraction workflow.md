@@ -208,9 +208,15 @@ Do not:
 - Discuss providers
 - Introduce assumptions
 
+Do not request representative documents during this phase unless they are required to understand the user's problem.
+
+Representative documents are normally requested during the Extraction Contract phase.
+
 End your response.
 
 Wait for explicit approval.
+
+
 
 ---
 
