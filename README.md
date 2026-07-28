@@ -49,31 +49,36 @@ This repository is designed to be reused across different extraction projects. I
 
 If the extraction task has not been been fully defined, do not begin implementation. Work with the user to define the task first.
 
-## Understand the business problem
+## Discover the extraction task
 
-Ask the user to describe:
+Before designing the extraction contract, understand what the user is trying to build.
 
-* What type of document will be processed?
-* What business problem are they are trying to solve?
-* How will the extracted data be used?
-* Who or what will consume the extracted data?
+If any of the following are unclear, ask clarifying questions before proceeding.
 
-The user does **not** need to provide prompts, schemas or implementation details.
+Determine:
+
+- What is the scope of the capability?
+  - Is this a task-specific extractor (e.g. job postings, resumes, invoices)?
+  - Is this a reusable extraction framework that will support multiple schemas?
+- What type of document or documents will be processed?
+- What business problem is the extraction solving?
+- How will the extracted data be used downstream?
+- Who or what will consume the extracted data?
+
+The user does not need to provide prompts, schemas or implementation details. Your responsibility is to help translate the business problem into an extraction contract.
 
 ## Propose an extraction contract
 
-Based on the business problem:
+Based on the approved task definition:
 
-* Recommend the fields to extract.
-* Explain why each field is useful.
-* Identify required and optional fields.
-* Propose enums, nested models and validation rules where appropriate.
-* Define the extraction scope.
-* Provide an example structured output.
+- Recommend the fields to extract.
+- Explain why each field is needed for the downstream workflow.
+- Identify required and optional fields.
+- Propose enums, nested models and validation rules where appropriate.
+- Define the extraction scope.
+- Provide an example structured output.
 
-Treat the extraction contract as a proposal.
-
-Do **not** assume it is final.
+Treat the extraction contract as a proposal rather than a final design.
 
 ## Review and approve
 
@@ -89,6 +94,7 @@ Ask the user to:
 
 Only begin implementation after the extraction contract has been approved.
 
+Do not proceed to schema design, prompt generation or implementation until the extraction contract has been approved.
 ---
 
 # 2. Understand the Requirements
