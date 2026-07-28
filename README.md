@@ -1,8 +1,20 @@
 # Extraction Engineering Guide
 
-This directory contains the engineering guidance for building reliable information extraction systems.
+Use this guide whenever a task involves:
 
-## Objective
+- Information extraction
+- Structured outputs
+- Classification
+- Entity extraction
+- Attribute extraction
+- Recommendation inputs
+- Converting unstructured data into structured data
+
+The documents in `rules/` are the source of truth for extraction-related engineering decisions.
+
+---
+
+# Objective
 
 Build extraction systems that are:
 
@@ -12,49 +24,50 @@ Build extraction systems that are:
 - Production-ready
 - Based on documented engineering guidance
 
-The documents in `rules/` are the source of truth for extraction-related implementation decisions.
-
 ---
 
-# Workflow
+# Engineering Workflow
 
-Follow this process for every extraction task.
+Follow this workflow for every extraction task.
 
-## 1. Understand the problem
+## 1. Understand the Problem
 
-Before writing code:
+Before writing any code:
 
-- Read the requirements.
-- Identify what information needs to be extracted.
-- Understand how the extracted data will be used.
-- If requirements are ambiguous, ask clarifying questions before implementing.
+- Read the requirements carefully.
+- Identify the information that needs to be extracted.
+- Understand how the extracted data will be used downstream.
+- Identify any ambiguities or missing requirements.
+- Ask clarifying questions before implementing.
 
 Do not guess missing requirements.
 
 ---
 
-## 2. Design the schema
+## 2. Design the Extraction
 
-Before writing prompts or code:
+Before writing prompts or code, determine:
 
-- Define the output schema.
-- Decide which fields are required and optional.
-- Use clear field names and types.
-- Reuse existing schemas when appropriate.
+- What is the input?
+- What is the required structured output?
+- What should the output schema look like?
+- Which fields are required?
+- Which fields are optional?
+- Which engineering rules apply?
 
 The schema is the contract between the model and the application.
 
 ---
 
-## 3. Choose the right approach
+## 3. Choose the Right Approach
 
-Determine whether the task requires:
+Determine whether the task should use:
 
 - Structured Outputs
 - Function Calling
 - Standard text generation
 
-Use the engineering rules to make this decision.
+Use the documents in `rules/` to make this decision.
 
 ---
 
@@ -62,23 +75,25 @@ Use the engineering rules to make this decision.
 
 While implementing:
 
-- Follow the applicable rules in the `rules/` directory.
-- Do not invent engineering practices that contradict the documented guidance.
+- Follow the applicable engineering rules.
 - Keep prompts, schemas and implementation consistent.
+- Reuse existing schemas and components when appropriate.
+- Do not invent engineering practices that contradict the documented guidance.
 
 ---
 
-## 5. Handle failures
+## 5. Design for Failure
 
-Design for failure.
+Assume things can go wrong.
 
 Consider:
 
-- invalid input
-- incomplete input
-- malformed output
-- refusals
-- validation failures
+- Invalid input
+- Missing information
+- Incomplete input
+- Malformed output
+- Validation failures
+- Model refusals
 
 Do not assume the model always returns valid data.
 
@@ -91,41 +106,59 @@ Before considering the implementation complete:
 - Create representative fixtures.
 - Add automated tests.
 - Test edge cases.
-- Test failure cases.
-- Test validation behaviour.
+- Test failure scenarios.
+- Verify validation behaviour.
 
 ---
 
 ## 7. Evaluate
 
-When prompts or extraction logic change:
+Whenever prompts or extraction logic change:
 
 - Run evaluations.
-- Compare against previous behaviour.
-- Verify that extraction quality has not regressed.
+- Compare results with previous behaviour.
+- Verify extraction quality has not regressed.
 
 ---
 
-## 8. Production readiness
+## 8. Prepare for Production
 
 Before deployment:
 
 - Review the implementation against the documented rules.
 - Ensure prompts are version controlled.
-- Ensure monitoring is available.
-- Plan safe rollout of prompt changes.
+- Plan a safe rollout strategy.
+- Ensure monitoring is in place.
 
 ---
 
-# When you're unsure
+# When You're Unsure
 
-Stop and explain:
+Stop before implementing.
 
-- what is uncertain
-- which rules apply
-- what information is missing
+Explain:
+
+- What is uncertain.
+- Which engineering rules apply.
+- What additional information is needed.
 
 Do not make assumptions.
+
+---
+
+# Completion Checklist
+
+Before considering the task complete, verify that:
+
+- Requirements are understood.
+- The output schema is defined.
+- The appropriate extraction approach was chosen.
+- The relevant engineering rules were followed.
+- Failure scenarios are handled.
+- Validation is implemented.
+- Tests are included.
+- Evaluations have been updated if prompts changed.
+- Production readiness has been considered.
 
 ---
 
@@ -133,6 +166,8 @@ Do not make assumptions.
 
 Always consult the documents in:
 
+```
 rules/
+```
 
-If this guide conflicts with a documented rule, the rule takes precedence.
+If this guide conflicts with a documented engineering rule, the rule takes precedence.
