@@ -2,56 +2,83 @@
 
 Build production-ready AI information extraction capabilities using reusable engineering patterns.
 
-This repository helps you convert unstructured documents into reliable, structured data using modern LLMs.
+This repository helps you convert unstructured documents into reliable, structured, validated data using modern LLMs.
 
-Examples include:
+Typical use cases include:
 
 - Job descriptions
 - Resumes
 - Invoices
 - Contracts
-- Support tickets
+- Customer support tickets
 - Research papers
+- Product catalogues
+- Any unstructured document that needs to become structured data
 
 ---
 
-## What You'll Build
+# How to Use
 
-Each project follows the same high-level workflow:
-
-```text
-Problem
-    ↓
-Requirements
-    ↓
-Extraction Capability
-    ↓
-Testing
-    ↓
-Evaluation
-    ↓
-Production
-```
-
-The repository provides reusable engineering guidance so you don't need to design the architecture from scratch.
-
----
-
-## Getting Started
-
-Describe the problem you're trying to solve.
+Describe the extraction problem you want to solve.
 
 For example:
 
-> I want to extract structured information from job descriptions.
+- I want to extract structured information from job descriptions.
+- I need to extract invoice data into JSON.
+- I want to classify customer support tickets.
+- I want to extract entities from legal contracts.
 
-The AI will guide you through the rest of the process.
+You do **not** need to:
+
+- Design prompts
+- Design schemas
+- Choose an extraction technique
+- Define validation rules
+- Decide on an implementation approach
+
+The AI will guide you through the engineering workflow.
 
 ---
 
-## Repository Structure
+# Engineering Workflow
 
+Every extraction project follows the same workflow.
+
+```text
+Problem
+      ↓
+Understand Requirements
+      ↓
+Extraction Task Specification
+      ↓
+Extraction Contract
+      ↓
+Implementation
+      ↓
+Testing
+      ↓
+Evaluation
+      ↓
+Production
 ```
+
+During this process the AI will help you:
+
+1. Understand the problem and gather requirements.
+2. Create an Extraction Task Specification.
+3. Design an Extraction Contract.
+4. Recommend the most appropriate implementation approach.
+5. Build the extraction capability.
+6. Test and evaluate the implementation.
+7. Prepare it for production.
+
+Each phase is completed before moving to the next.
+
+---
+
+# Repository Structure
+
+```text
 docs/
     extraction-engineering-guide.md
 
@@ -59,33 +86,33 @@ rules/
     ...
 ```
 
-### docs/
+## `docs/`
 
-Contains the engineering workflow the AI follows when building an extraction capability.
+Contains the end-to-end engineering workflow the AI follows when building an extraction capability.
 
-### rules/
+## `rules/`
 
-Contains the detailed engineering guidance and implementation standards used throughout the project.
+Contains the detailed engineering guidance, implementation standards and best practices used throughout the project.
 
 ---
 
-## Documentation
+# Documentation
 
 | Document | Purpose |
 |----------|---------|
-| `docs/extraction-engineering-guide.md` | End-to-end engineering workflow |
-| `rules/` | Detailed implementation guidance and best practices |
+| `extraction-engineering-guide.md` | End-to-end extraction engineering workflow |
+| `rules/` | Detailed engineering guidance and implementation standards |
 
 ---
 
-## Source of Truth
+# Source of Truth
 
-The engineering workflow is documented in:
+The AI follows the workflow documented in:
 
-`docs/extraction-engineering-guide.md`
+`docs/extraction workflow.md`
 
-Implementation guidance is documented in:
+Implementation decisions are guided by the documents in:
 
 `rules/`
 
-If a document in `rules/` conflicts with the engineering guide, the documented engineering rule takes precedence.
+If the engineering guide conflicts with a documented engineering rule, the documented engineering rule takes precedence.
