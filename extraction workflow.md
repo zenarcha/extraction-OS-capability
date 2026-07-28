@@ -280,6 +280,32 @@ Define **what** information should be extracted.
 
 Do not define **how** it will be represented.
 
+## Representative Documents
+
+Before designing the Extraction Contract, determine whether representative documents are available.
+
+If the user has not provided any representative documents, ask them to provide some before continuing.
+
+Recommended number of examples:
+
+- **Minimum:** 3 representative documents
+- **Recommended:** 5–10 representative documents
+- **Complex or highly variable document types:** 10–20 representative documents
+
+The examples should represent the range of documents the extraction system will process.
+
+Where possible, the examples should include:
+
+- Different layouts or templates
+- Documents from different sources
+- Optional or missing fields
+- Edge cases
+- Realistic production examples
+
+Do not continue designing the Extraction Contract until sufficient representative documents have been provided, unless the user explicitly requests a preliminary design based on assumptions.
+
+If proceeding without representative documents, clearly state that the Extraction Contract is provisional and will need to be validated and refined once representative examples are available.
+
 ## Deliverable
 
 Recommend:
