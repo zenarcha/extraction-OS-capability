@@ -26,6 +26,17 @@ Build extraction systems that are:
 
 ---
 
+# Project Conventions
+
+Unless the task specifies otherwise:
+
+- Build extraction modules to be provider-agnostic.
+- Use Instructor's `from_provider()`.
+- Make the provider configurable.
+- Do not hardcode a provider.
+
+---
+
 # Engineering Workflow
 
 Follow this workflow for every extraction task.
@@ -39,12 +50,15 @@ Before writing any code:
 - Understand how the extracted data will be used downstream.
 - Identify any ambiguities or missing requirements.
 - Ask clarifying questions before implementing.
+- Do not guess missing requirements.
 
-Do not guess missing requirements.
+### Clarify Project Decisions
 
-## Clarify Project Decisions
+Before implementing, identify any project-level decisions that affect the architecture but are not specified in:
 
-Before implementing, identify any project-level decisions that affect the architecture but are not specified in the requirements or engineering rules.
+- The task requirements
+- This guide
+- The documented engineering rules
 
 Examples include:
 
@@ -75,13 +89,15 @@ The schema is the contract between the model and the application.
 
 ## 3. Choose the Right Approach
 
-Determine whether the task should use:
+Determine the most appropriate implementation approach based on the requirements and the documented engineering rules.
+
+Consider whether the task should use:
 
 - Structured Outputs
 - Function Calling
 - Standard text generation
 
-Use the documents in `rules/` to make this decision.
+If multiple approaches are appropriate, explain the trade-offs before choosing one.
 
 ---
 
@@ -92,6 +108,7 @@ While implementing:
 - Follow the applicable engineering rules.
 - Keep prompts, schemas and implementation consistent.
 - Reuse existing schemas and components when appropriate.
+- Prefer the simplest implementation that satisfies the requirements.
 - Do not invent engineering practices that contradict the documented guidance.
 
 ---
@@ -131,7 +148,7 @@ Whenever prompts or extraction logic change:
 
 - Run evaluations.
 - Compare results with previous behaviour.
-- Verify extraction quality has not regressed.
+- Verify that extraction quality has not regressed.
 
 ---
 
@@ -139,7 +156,7 @@ Whenever prompts or extraction logic change:
 
 Before deployment:
 
-- Review the implementation against the documented rules.
+- Review the implementation against the documented engineering rules.
 - Ensure prompts are version controlled.
 - Plan a safe rollout strategy.
 - Ensure monitoring is in place.
@@ -175,22 +192,9 @@ Before considering the task complete, verify that:
 - Production readiness has been considered.
 
 ---
-# Project Conventions
 
-Unless the task specifies otherwise:
-
-- Build extraction modules to be provider-agnostic.
-- Use Instructor's `from_provider()`.
-- Make the provider configurable.
-- Do not hardcode a provider.
-
----
 # Source of Truth
 
-Always consult the documents in:
+Consult the documents in `rules/` before making extraction-related engineering decisions.
 
-```
-rules/
-```
-
-If this guide conflicts with a documented engineering rule, the rule takes precedence.
+If this guide conflicts with a documented engineering rule, follow the documented engineering rule.
