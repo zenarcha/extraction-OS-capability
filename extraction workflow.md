@@ -1,16 +1,22 @@
 # Extraction Engineering Guide
 
-Use this guide whenever a task involves:
+Use this guide whenever the user is designing, building, or implementing a reusable extraction capability.
 
-- Information extraction
-- Structured outputs
-- Classification
+Examples include:
+
+- Information extraction systems
+- Structured output pipelines
+- Classification systems
 - Entity extraction
 - Attribute extraction
-- Recommendation inputs
-- Converting unstructured data into structured data
+- Recommendation input generation
+- Converting unstructured data into structured application data
 
-The documents in `rules/` are the source of truth for extraction engineering decisions.
+Do not use this workflow for simple one-off extraction requests unless the user explicitly asks to engineer a reusable extraction system.
+
+Before beginning the workflow, review the engineering guidance in `rules/`.
+
+The documents in `rules/` are the source of truth for engineering decisions throughout this workflow.
 
 If this guide conflicts with a documented engineering rule, follow the documented engineering rule.
 
@@ -30,38 +36,41 @@ Build extraction systems that are:
 
 # Project Conventions
 
-These conventions apply to every extraction project unless the user explicitly overrides them.
+These conventions apply unless the user explicitly overrides them.
 
-Assume these defaults:
+Default conventions:
 
 - Build extraction modules to be provider-agnostic.
-- Use Instructor's `from_provider()`.
-- Make the provider configurable.
-- Do not hardcode a provider.
+- Use Instructor's `from_provider()` unless project requirements require a different integration.
+- Keep the provider configurable.
+- Do not hardcode providers.
 
 These are repository defaults.
 
-Do not ask the user to confirm these conventions unless they conflict with the project requirements.
+Do not ask the user to confirm them unless they conflict with project requirements.
 
-Do not discuss these conventions during earlier workflow phases unless the user explicitly overrides them.
+Do not discuss them before the Implementation Scope phase unless the user explicitly overrides them.
 
 ---
 
 # Engineering Workflow
 
-Follow this workflow for every extraction task.
+Every extraction project follows the same workflow.
 
 Each phase has:
 
-- A single objective
-- A single deliverable
-- A single approval checkpoint
+- One objective
+- One deliverable
+- One approval checkpoint
 
 Complete every phase in order.
 
-Do not skip phases.
+Do not:
 
-Do not merge phases.
+- Skip phases
+- Merge phases
+- Jump ahead
+- Perform later phases early
 
 ---
 
@@ -69,70 +78,76 @@ Do not merge phases.
 
 This workflow is approval-gated.
 
-Treat every phase as an independent conversation checkpoint.
+Treat every phase as a separate conversation checkpoint.
 
 For every phase:
 
 - Produce only the current phase.
 - End your response after completing the phase.
 - Wait for explicit user approval before beginning the next phase.
-- Do not include content from later phases.
-- Do not combine multiple phases into a single response.
+- Do not discuss later phases.
+- Do not combine multiple phases into one response.
 
-## Clarification vs Approval
+If your execution environment encourages producing a complete implementation plan, this workflow takes precedence.
 
-A phase may require multiple rounds of clarification before it is complete.
+---
 
-Responses to clarification questions are **not approval**.
+# Clarification vs Approval
 
-Approval only occurs after the current phase has been completed and the user explicitly confirms that you may continue.
+A phase may require multiple rounds of clarification.
 
-Examples of approval include:
+Clarification is **not approval**.
+
+User responses that answer questions, provide additional information, or upload example documents do not advance the workflow.
+
+Approval only occurs after the current phase is complete and the user explicitly confirms that you may continue.
+
+Examples of approval:
 
 - Approved
 - Continue
 - Proceed
 - Yes, move to the next phase
 
-The following are **not** approval:
+Examples that are **not** approval:
 
-- Answering clarification questions
+- OK
+- Sounds good
+- Answering questions
+- Uploading files
 - Providing additional requirements
-- Asking new questions
-- "OK"
-- "Sounds good"
-
-If your execution environment encourages producing a complete implementation plan, this workflow takes precedence.
 
 ---
 
-# Handling Information from Later Phases
+# Workflow Entry Point
 
-Users may provide information that belongs to later phases, including:
+Always begin at Phase 1.
+
+Never begin at a later phase because the user supplied:
 
 - Schemas
 - Prompts
 - Code
 - Validation rules
+- Example outputs
 - Implementation ideas
 
-Acknowledge the information.
+If later-phase information is provided:
 
-Record it if necessary.
-
-Do not act on it until the appropriate phase.
-
-Do not skip earlier phases because later-phase information was provided.
+- Acknowledge it.
+- Record it if appropriate.
+- Do not act on it until the appropriate phase.
+- Continue following the workflow from Phase 1.
 
 ---
 
-# 1. Understand the Problem
+# Phase 1 — Understand the Problem
 
 ## Objective
 
 Discover and validate the user's requirements.
 
-The objective of this phase is to understand the problem.
+The purpose of this phase is to understand the problem.
 
 It is **not** to document or design the solution.
 
@@ -140,27 +155,27 @@ It is **not** to document or design the solution.
 
 First determine what information the user has already provided.
 
-This includes:
+Consider:
 
 - The user's request
 - Attached documents
 - Example inputs
-- Information already shared in the current conversation
+- Information already shared during the conversation
 
 Do not ask questions that are already answered.
 
 Only ask questions needed to resolve genuine uncertainty.
 
-## Understand
+## Activities
 
 Determine:
 
-- What is the user trying to build?
-- What business problem are they solving?
+- What capability is being built?
+- What business problem is being solved?
 - What documents or data will be processed?
 - How will the extracted information be used?
 - Who or what consumes the extracted data?
-- Are there any known business or project constraints?
+- What business or technical constraints exist?
 
 The user does not need to provide:
 
@@ -169,13 +184,11 @@ The user does not need to provide:
 - Validation rules
 - Implementation details
 
-Continue asking clarification questions until the requirements are understood.
+Continue asking questions until the requirements are understood.
 
 ## Deliverable
 
-Provide a brief confirmation of your understanding.
-
-Summarise only:
+Provide a brief summary containing only:
 
 - What is being built
 - Business goal
@@ -185,35 +198,31 @@ Summarise only:
 
 Do not:
 
-- Create documentation.
-- Create an Extraction Task Specification.
-- Recommend extraction fields.
-- Describe document structure.
-- Analyse example documents.
-- Discuss validation.
-- Discuss implementation.
-- Discuss providers.
-- Introduce new assumptions.
+- Create documentation
+- Create specifications
+- Recommend extraction fields
+- Analyse document structure
+- Discuss schemas
+- Discuss validation
+- Discuss implementation
+- Discuss providers
+- Introduce assumptions
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for explicit approval.
 
 ---
 
-# 2. Create an Extraction Task Specification
+# Phase 2 — Create the Extraction Task Specification
 
 ## Objective
 
 Document the approved requirements.
 
-Phase 1 validates the requirements through conversation.
+Phase 1 validates requirements.
 
-Phase 2 creates the first engineering artefact.
-
-Do not introduce new requirements during this phase.
-
-If new requirements are discovered, return to Phase 1.
+Phase 2 documents them.
 
 ## Deliverable
 
@@ -221,29 +230,27 @@ Document:
 
 ### Capability
 
-- What capability is being built?
-- Is it reusable or task-specific?
+- Capability name
+- Reusable or task-specific
 
 ### Input
 
-- Document types to be processed.
+- Supported document types
 
 ### Business Goal
 
-- What business problem does the extraction solve?
+- Problem solved
 
 ### Downstream Workflow
 
-- How will the extracted information be used?
-- Who or what consumes the extracted data?
+- Consumers
+- How outputs are used
 
-### Project Constraints
+### Constraints
 
-Document known business or project constraints.
+Document known:
 
-Examples include:
-
-- Regulatory requirements
+- Regulatory constraints
 - Compliance requirements
 - Privacy requirements
 - Performance requirements
@@ -251,58 +258,53 @@ Examples include:
 
 Do not:
 
-- Recommend extraction fields.
-- Design schemas.
-- Choose providers.
-- Choose data types.
-- Discuss implementation.
+- Recommend extraction fields
+- Design schemas
+- Choose providers
+- Choose data types
+- Discuss implementation
 
-Present the Extraction Task Specification.
+If new requirements appear, return to Phase 1.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 3. Design the Extraction Contract
+# Phase 3 — Design the Extraction Contract
 
 ## Objective
 
 Define **what** information should be extracted.
 
-Do not decide how it will be represented.
+Do not define **how** it will be represented.
 
 ## Deliverable
 
 Recommend:
 
 - Fields
-- Why each field is required
+- Purpose of each field
 - Required vs optional
 - Validation requirements
 - Extraction scope
-- Plain-language descriptions of each field
+- Plain-language descriptions
 
 Do not produce:
 
 - JSON
-- Example structured outputs
+- Example outputs
 - Schemas
 - Sample objects
-
-Those belong in the Design phase because they require implementation decisions.
+- Pydantic models
 
 Do not:
 
-- Choose data types.
-- Choose enums.
-- Design nested models.
-- Design Pydantic models.
-- Choose validation implementations.
-- Choose implementation libraries.
-
-Present the Extraction Contract.
+- Choose data types
+- Choose enums
+- Design nested models
+- Choose implementation libraries
 
 Ask the user to review:
 
@@ -310,52 +312,50 @@ Ask the user to review:
 - Remove fields
 - Rename fields
 - Modify validation requirements
-- Confirm the extraction scope
+- Confirm extraction scope
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 4. Confirm the Implementation Scope
+# Phase 4 — Confirm the Implementation Scope
 
 ## Objective
 
 Agree what will be delivered.
 
+## Deliverable
+
 Confirm:
 
 - Prototype
 - MVP
-- Production-ready implementation
+- Production-ready
 
 Also confirm:
 
-- Provider requirements (if different from project defaults)
-- Deployment requirements
+- Provider requirements
+- Deployment expectations
 - Testing expectations
 - Evaluation expectations
 
-Use the project conventions unless the user explicitly overrides them.
+Use the project conventions unless overridden.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 5. Design the Extraction
+# Phase 5 — Design the Extraction
 
 ## Objective
 
-Determine how the approved Extraction Contract will be represented.
+Design how the approved Extraction Contract will be represented.
 
-Review:
-
-- Approved Task Specification
-- Approved Extraction Contract
-- Approved Implementation Scope
+## Deliverable
 
 Design:
 
@@ -364,25 +364,39 @@ Design:
 - Enums
 - Nested models
 - Validation rules
+
+Include domain-specific modelling where appropriate.
+
+Examples include:
+
 - Currency representation
 - Locale handling
 - Tax modelling
+- Date and time handling
+- Units of measurement
+- Geographic formats
 
 Do not introduce new extraction fields.
 
-If the Extraction Contract changes, return to Phase 3.
+If the contract changes, return to Phase 3.
 
-The schema should support downstream workflows rather than mirror the source document.
+Design for downstream consumers rather than mirroring the source document.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 6. Choose the Implementation Approach
+# Phase 6 — Choose the Implementation Approach
 
-Determine the most appropriate implementation approach using the documented engineering rules.
+## Objective
+
+Select the most appropriate implementation approach.
+
+## Deliverable
+
+Choose the implementation approach using the documented engineering rules.
 
 Examples include:
 
@@ -394,11 +408,17 @@ Explain trade-offs where appropriate.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 7. Implement
+# Phase 7 — Implement
+
+## Objective
+
+Implement the approved design.
+
+## Deliverable
 
 Implement using the documented engineering rules.
 
@@ -406,17 +426,21 @@ Keep prompts, schemas and implementation consistent.
 
 Reuse existing components where appropriate.
 
-Prefer the simplest implementation that satisfies the requirements.
+Prefer the simplest implementation that satisfies the approved requirements.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 8. Design for Failure
+# Phase 8 — Design for Failure
 
-Assume the model can fail.
+## Objective
+
+Design robust failure handling.
+
+## Deliverable
 
 Design handling for:
 
@@ -431,11 +455,17 @@ Never assume the model always succeeds.
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 9. Test
+# Phase 9 — Test
+
+## Objective
+
+Verify the implementation.
+
+## Deliverable
 
 Create:
 
@@ -451,48 +481,60 @@ Verify:
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 10. Evaluate
+# Phase 10 — Evaluate
+
+## Objective
+
+Measure extraction quality.
+
+## Deliverable
 
 Whenever prompts or extraction logic change:
 
-- Run evaluations.
-- Compare against previous behaviour.
-- Verify that extraction quality has not regressed.
+- Run evaluations
+- Compare against previous results
+- Verify no regressions
 
 End your response.
 
-Wait for explicit user approval before continuing.
+Wait for approval.
 
 ---
 
-# 11. Prepare for Production
+# Phase 11 — Prepare for Production
+
+## Objective
+
+Prepare the extraction system for deployment.
+
+## Deliverable
 
 Before deployment:
 
-- Review against the documented engineering rules.
-- Ensure prompts are version controlled.
-- Plan a safe rollout strategy.
-- Ensure monitoring is in place.
+- Review against the engineering rules
+- Version prompts
+- Plan rollout
+- Enable monitoring
 
 End your response.
 
-Wait for explicit user approval before considering the project complete.
+Wait for approval before considering the project complete.
 
 ---
 
 # When You're Unsure
 
-Stop before continuing.
+Stop.
 
 Explain:
 
-- What is uncertain.
-- Which engineering rules apply.
-- What information is missing.
+- What is uncertain
+- Which engineering rules apply
+- What information is missing
 
 Do not make assumptions.
 
@@ -500,17 +542,17 @@ Do not make assumptions.
 
 # Completion Checklist
 
-Before considering the task complete, verify that:
+Before considering the project complete, verify:
 
-- Problem understanding was approved.
-- The Extraction Task Specification was approved.
-- The Extraction Contract was approved.
-- The Implementation Scope was agreed.
-- The extraction schema was designed.
-- The implementation approach was justified.
-- The documented engineering rules were followed.
-- Failure scenarios were handled.
-- Validation was implemented.
-- Tests were added.
-- Evaluations were completed.
-- Production readiness was considered.
+- Problem understanding approved
+- Task Specification approved
+- Extraction Contract approved
+- Implementation Scope approved
+- Schema designed
+- Implementation approach approved
+- Engineering rules followed
+- Failure handling designed
+- Validation implemented
+- Tests added
+- Evaluations completed
+- Production readiness reviewed
