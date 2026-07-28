@@ -114,7 +114,7 @@ The specification should define:
 
 - How will the extracted information be used?
 - Who or what consumes it?
-  
+
 ## Project Constraints
 
 Document known project constraints that affect implementation, such as:
@@ -125,8 +125,17 @@ Document known project constraints that affect implementation, such as:
 - Deployment constraints
 - Provider requirements
 
-Do not make schema or data modelling decisions during this phase.
+Do **not** make schema or data modelling decisions during this phase.
+
 Those decisions belong in the Extraction Contract and schema design phases.
+
+Present the Extraction Task Specification to the user for review.
+
+Wait for explicit user approval before continuing.
+
+Stop after completing this phase.
+
+Do **not** continue until the Extraction Task Specification has been approved.
 
 ---
 
@@ -134,14 +143,20 @@ Those decisions belong in the Extraction Contract and schema design phases.
 
 Using the approved Extraction Task Specification:
 
-- Recommend the information to extract.
-- Explain why each field is required.
-- Identify required and optional fields.
-- Define enums where appropriate.
-- Define nested models where appropriate.
-- Define validation rules.
-- Define the extraction scope.
-- Provide an example structured output.
+The Extraction Contract defines **what** information should be extracted.
+
+Do **not** decide **how** the data will be represented in code during this phase.
+
+Schema design, data types, enums, nested models and validation implementations belong to the Design phase.
+
+Recommend:
+
+- The information to extract.
+- Why each field is required.
+- Required and optional fields.
+- Validation rules.
+- The extraction scope.
+- An example structured output.
 
 The Extraction Contract is a proposal.
 
@@ -155,11 +170,11 @@ Ask the user to:
 - Modify validation rules.
 - Confirm the extraction scope.
 
+Wait for explicit user approval before continuing.
+
+Stop after completing this phase.
+
 Do **not** design the schema or begin implementation until the Extraction Contract has been approved.
-
-This phase defines **what** information should be extracted.
-
-Do not decide **how** individual fields should be modelled in the schema until the extraction contract has been approved.
 
 ---
 
@@ -196,22 +211,23 @@ Before writing implementation code:
 - Identify downstream workflows.
 - Identify the applicable engineering rules.
 
-  Examples include:
+During this phase determine how the approved Extraction Contract will be represented.
+
+Examples include:
 
 - Data types
 - Enums
+- Nested models
+- Validation rules
 - Currency representation
 - Locale handling
 - Tax modelling
-- Validation rules
-- Nested models
 
 Design the extraction schema from the approved Extraction Contract.
 
 The schema is the contract between the model and the application.
 
 It should support downstream workflows rather than simply mirror the source document.
-
 
 ---
 
