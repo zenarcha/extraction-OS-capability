@@ -114,19 +114,19 @@ The specification should define:
 
 - How will the extracted information be used?
 - Who or what consumes it?
+  
+## Project Constraints
 
-## Constraints
+Document known project constraints that affect implementation, such as:
 
-Document any known constraints, such as:
-
-- Provider requirements
+- Regulatory requirements
+- Compliance requirements
 - Performance requirements
 - Deployment constraints
-- Regulatory requirements
+- Provider requirements
 
-Present the Extraction Task Specification to the user for review.
-
-Do **not** continue until it has been approved.
+Do not make schema or data modelling decisions during this phase.
+Those decisions belong in the Extraction Contract and schema design phases.
 
 ---
 
