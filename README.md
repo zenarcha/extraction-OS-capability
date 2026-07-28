@@ -161,7 +161,16 @@ Before considering the task complete, verify that:
 - Production readiness has been considered.
 
 ---
+# Project Conventions
 
+Unless the task specifies otherwise:
+
+- Build extraction modules to be provider-agnostic.
+- Use Instructor's `from_provider()`.
+- Make the provider configurable.
+- Do not hardcode a provider.
+
+---
 # Source of Truth
 
 Always consult the documents in:
