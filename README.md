@@ -118,11 +118,13 @@ Identify any project-level decisions that are not specified in:
 
 Examples include:
 
-* Target LLM provider
-* Scope of the implementation (general-purpose vs. task-specific)
-* Testing strategy
-* Deployment constraints
-* Performance or latency requirements
+- Target LLM provider
+- Scope of the capability (task-specific vs. reusable framework)
+- Scope of the implementation (prototype, MVP or production-ready)
+- Which phases should be included (testing, evaluation, production readiness)
+- Testing strategy
+- Deployment constraints
+- Performance or latency requirements
 
 If these decisions cannot be inferred, ask for clarification before proceeding.
 
