@@ -1,6 +1,6 @@
 # Extraction Engineering Guide
 
-Use this guide whenever the user is designing, building, or implementing a reusable extraction capability.
+Use this guide whenever the user wants to design, build or implement a reusable AI information extraction capability.
 
 Examples include:
 
@@ -10,9 +10,9 @@ Examples include:
 - Entity extraction
 - Attribute extraction
 - Recommendation input generation
-- Converting unstructured data into structured application data
+- Converting unstructured documents into structured application data
 
-Do not use this workflow for simple one-off extraction requests unless the user explicitly asks to engineer a reusable extraction system.
+Do **not** use this workflow for simple one-off extraction requests unless the user explicitly asks to engineer a reusable extraction capability.
 
 Before beginning the workflow, review the engineering guidance in `rules/`.
 
@@ -24,28 +24,43 @@ If this guide conflicts with a documented engineering rule, follow the documente
 
 # Objective
 
-Build extraction systems that are:
+Build extraction capabilities that are:
 
 - Reliable
 - Structured
 - Type-safe
+- Reusable
 - Production-ready
 - Based on documented engineering guidance
 
 ---
 
+# Capability-First Principle
+
+Always build reusable extraction capabilities rather than solutions for individual documents.
+
+Business requirements define the capability.
+
+If the user provides one or more documents, treat them as representative examples of the document type unless they explicitly request a one-off extraction.
+
+Representative documents help validate and refine the capability by revealing document variations, optional fields and edge cases.
+
+Do not derive business requirements, extraction fields or business rules solely from a single example document.
+
+The capability should generalise across the expected range of documents it will process.
+
+---
+
 # Project Conventions
 
-These conventions apply unless the user explicitly overrides them.
-
-Default conventions:
+Unless the user explicitly overrides them, assume the following repository defaults:
 
 - Build extraction modules to be provider-agnostic.
-- Use Instructor's `from_provider()` unless project requirements require a different integration.
+- Use Instructor's `from_provider()`.
 - Keep the provider configurable.
 - Do not hardcode providers.
 
-These are repository defaults.
+These conventions are repository defaults.
 
 Do not ask the user to confirm them unless they conflict with project requirements.
 
@@ -55,7 +70,7 @@ Do not discuss them before the Implementation Scope phase unless the user explic
 
 # Engineering Workflow
 
-Every extraction project follows the same workflow.
+Every extraction capability follows the same workflow.
 
 Each phase has:
 
@@ -70,60 +85,54 @@ Do not:
 - Skip phases
 - Merge phases
 - Jump ahead
-- Perform later phases early
+- Perform work from later phases early.
 
 ---
 
-# Workflow Execution Rules
+# Workflow Rules
 
 This workflow is approval-gated.
 
-Treat every phase as a separate conversation checkpoint.
+Treat every phase as an independent conversation checkpoint.
 
 For every phase:
 
 - Produce only the current phase.
-- End your response after completing the phase.
-- Wait for explicit user approval before beginning the next phase.
+- End your response after completing the deliverable.
+- Wait for explicit user approval before continuing.
 - Do not discuss later phases.
 - Do not combine multiple phases into one response.
 
-If your execution environment encourages producing a complete implementation plan, this workflow takes precedence.
+If your execution environment encourages producing a complete implementation plan, ignore that behaviour and follow this workflow instead.
 
----
+## Clarification vs Approval
 
-# Clarification vs Approval
+Clarification is **not** approval.
 
-A phase may require multiple rounds of clarification.
+The user may answer questions, upload documents or provide additional information without approving the current phase.
 
-Clarification is **not approval**.
+Only continue when the user explicitly approves the completed phase.
 
-User responses that answer questions, provide additional information, or upload example documents do not advance the workflow.
-
-Approval only occurs after the current phase is complete and the user explicitly confirms that you may continue.
-
-Examples of approval:
+Examples of approval include:
 
 - Approved
 - Continue
 - Proceed
-- Yes, move to the next phase
+- Move to the next phase
 
-Examples that are **not** approval:
+Examples that are **not** approval include:
 
 - OK
 - Sounds good
-- Answering questions
-- Uploading files
+- Uploading documents
+- Answering clarification questions
 - Providing additional requirements
 
 ---
 
-# Workflow Entry Point
+# Handling Later-Phase Information
 
-Always begin at Phase 1.
-
-Never begin at a later phase because the user supplied:
+Users may provide information that belongs to later phases, including:
 
 - Schemas
 - Prompts
@@ -132,12 +141,12 @@ Never begin at a later phase because the user supplied:
 - Example outputs
 - Implementation ideas
 
-If later-phase information is provided:
+When this happens:
 
-- Acknowledge it.
+- Acknowledge the information.
 - Record it if appropriate.
-- Do not act on it until the appropriate phase.
-- Continue following the workflow from Phase 1.
+- Do not act on it until the relevant phase.
+- Continue the workflow from Phase 1.
 
 ---
 
@@ -145,7 +154,7 @@ If later-phase information is provided:
 
 ## Objective
 
-Discover and validate the user's requirements.
+Understand and validate the user's requirements.
 
 The purpose of this phase is to understand the problem.
 
@@ -153,31 +162,37 @@ It is **not** to document or design the solution.
 
 ## Before Asking Questions
 
-First determine what information the user has already provided.
+Review everything the user has already provided, including:
 
-Consider:
-
-- The user's request
-- Attached documents
+- Their request
+- Previous conversation
+- Uploaded documents
 - Example inputs
-- Information already shared during the conversation
 
 Do not ask questions that are already answered.
 
 Only ask questions needed to resolve genuine uncertainty.
 
-## Activities
+If representative documents have already been provided:
+
+- Treat them as representative examples of the document type.
+- Use them only to understand the business problem and document domain.
+- Do not analyse document structure.
+- Do not recommend extraction fields.
+- Do not derive business requirements from the examples.
+
+## Determine
 
 Determine:
 
 - What capability is being built?
 - What business problem is being solved?
-- What documents or data will be processed?
+- What document types will be processed?
 - How will the extracted information be used?
-- Who or what consumes the extracted data?
+- Who or what consumes the extracted information?
 - What business or technical constraints exist?
 
-The user does not need to provide:
+The user does **not** need to provide:
 
 - Prompts
 - Schemas
@@ -188,12 +203,12 @@ Continue asking questions until the requirements are understood.
 
 ## Deliverable
 
-Provide a brief summary containing only:
+Provide a concise summary containing only:
 
-- What is being built
+- Capability
 - Business goal
-- Input
-- Downstream consumer
+- Inputs
+- Downstream consumers
 - Known constraints
 
 Do not:
@@ -208,15 +223,9 @@ Do not:
 - Discuss providers
 - Introduce assumptions
 
-Do not request representative documents during this phase unless they are required to understand the user's problem.
-
-Representative documents are normally requested during the Extraction Contract phase.
-
 End your response.
 
 Wait for explicit approval.
-
-
 
 ---
 
@@ -226,9 +235,11 @@ Wait for explicit approval.
 
 Document the approved requirements.
 
-Phase 1 validates requirements.
+Phase 1 validates the requirements.
 
 Phase 2 documents them.
+
+If new requirements emerge during this phase, return to Phase 1 before continuing.
 
 ## Deliverable
 
@@ -245,12 +256,14 @@ Document:
 
 ### Business Goal
 
-- Problem solved
+- Problem being solved
 
 ### Downstream Workflow
 
+Document:
+
 - Consumers
-- How outputs are used
+- How the extracted information will be used
 
 ### Constraints
 
@@ -270,11 +283,9 @@ Do not:
 - Choose data types
 - Discuss implementation
 
-If new requirements appear, return to Phase 1.
-
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -282,41 +293,39 @@ Wait for approval.
 
 ## Objective
 
-Define **what** information should be extracted.
+Define **what** information the extraction capability should produce.
 
 Do not define **how** it will be represented.
 
+The Extraction Contract is driven primarily by the approved business requirements.
+
+Representative documents are used to validate and refine the contract, not define it.
+
 ## Representative Documents
 
-Before designing the Extraction Contract, determine whether representative documents are available.
+If representative documents are available:
 
-If the user has not provided any representative documents, ask them to provide some before continuing.
+- Review them before finalising the Extraction Contract.
+- Validate that the proposed fields satisfy the approved business requirements.
+- Identify optional fields.
+- Identify variations in document structure and content.
+- Confirm the contract generalises across the expected range of documents.
 
-Recommended number of examples:
+If representative documents reveal missing business requirements, return to Phase 2 before continuing.
 
-- **Minimum:** 3 representative documents
-- **Recommended:** 5–10 representative documents
-- **Complex or highly variable document types:** 10–20 representative documents
+If representative documents are not available:
 
-The examples should represent the range of documents the extraction system will process.
+- Design the Extraction Contract using the approved requirements.
+- Clearly identify any assumptions.
+- Recommend validating and refining the contract once representative examples become available.
 
-Where possible, the examples should include:
-
-- Different layouts or templates
-- Documents from different sources
-- Optional or missing fields
-- Edge cases
-- Realistic production examples
-
-Do not continue designing the Extraction Contract until sufficient representative documents have been provided, unless the user explicitly requests a preliminary design based on assumptions.
-
-If proceeding without representative documents, clearly state that the Extraction Contract is provisional and will need to be validated and refined once representative examples are available.
+Representative documents improve confidence in the Extraction Contract but are not required to begin designing it.
 
 ## Deliverable
 
-Recommend:
+Define:
 
-- Fields
+- Extraction fields
 - Purpose of each field
 - Required vs optional
 - Validation requirements
@@ -326,8 +335,8 @@ Recommend:
 Do not produce:
 
 - JSON
-- Example outputs
 - Schemas
+- Example outputs
 - Sample objects
 - Pydantic models
 
@@ -338,17 +347,17 @@ Do not:
 - Design nested models
 - Choose implementation libraries
 
-Ask the user to review:
+Ask the user to review the contract by confirming:
 
-- Add fields
-- Remove fields
-- Rename fields
-- Modify validation requirements
-- Confirm extraction scope
+- Fields to add
+- Fields to remove
+- Fields to rename
+- Validation requirements
+- Extraction scope
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -373,11 +382,11 @@ Also confirm:
 - Testing expectations
 - Evaluation expectations
 
-Use the project conventions unless overridden.
+Use the repository conventions unless the user explicitly overrides them.
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -385,7 +394,13 @@ Wait for approval.
 
 ## Objective
 
-Design how the approved Extraction Contract will be represented.
+Design **how** the approved Extraction Contract will be represented.
+
+The purpose of this phase is to translate the approved contract into a structured representation suitable for implementation.
+
+Do not introduce new business requirements or extraction fields during this phase.
+
+If the Extraction Contract needs to change, return to Phase 3.
 
 ## Deliverable
 
@@ -402,21 +417,24 @@ Include domain-specific modelling where appropriate.
 Examples include:
 
 - Currency representation
+- Date and time handling
 - Locale handling
 - Tax modelling
-- Date and time handling
 - Units of measurement
 - Geographic formats
+- Identifier formats
 
-Do not introduce new extraction fields.
+Design the schema for downstream consumers rather than mirroring the source document.
 
-If the contract changes, return to Phase 3.
+Do not:
 
-Design for downstream consumers rather than mirroring the source document.
+- Add new extraction fields
+- Remove approved fields
+- Change the business meaning of fields
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -424,7 +442,7 @@ Wait for approval.
 
 ## Objective
 
-Select the most appropriate implementation approach.
+Select the most appropriate implementation approach for the approved design.
 
 ## Deliverable
 
@@ -436,11 +454,21 @@ Examples include:
 - Function Calling
 - Standard text generation
 
-Explain trade-offs where appropriate.
+Consider factors such as:
+
+- Reliability
+- Validation requirements
+- Complexity
+- Maintainability
+- Downstream integration
+
+Explain any significant trade-offs.
+
+Do not begin implementation during this phase.
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -452,17 +480,22 @@ Implement the approved design.
 
 ## Deliverable
 
-Implement using the documented engineering rules.
+Implement the extraction capability using the documented engineering guidance.
 
-Keep prompts, schemas and implementation consistent.
+Ensure that:
 
-Reuse existing components where appropriate.
+- The implementation matches the approved Extraction Contract.
+- Prompts, schemas and validation remain consistent.
+- Existing components are reused where appropriate.
+- The implementation remains as simple as possible while satisfying the approved requirements.
 
-Prefer the simplest implementation that satisfies the approved requirements.
+Do not introduce new business requirements during implementation.
+
+If implementation reveals a design issue, return to the appropriate earlier phase before continuing.
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -470,7 +503,11 @@ Wait for approval.
 
 ## Objective
 
-Design robust failure handling.
+Design how the extraction capability behaves when things go wrong.
+
+Extraction systems should fail predictably and safely.
+
+Never assume the model always succeeds.
 
 ## Deliverable
 
@@ -478,16 +515,25 @@ Design handling for:
 
 - Invalid input
 - Missing information
+- Unsupported documents
 - Incomplete input
-- Malformed output
-- Validation failures
+- Ambiguous information
+- Malformed model output
+- Schema validation failures
 - Model refusals
+- Timeouts
+- Unexpected responses
 
-Never assume the model always succeeds.
+For each failure scenario, define:
+
+- How it is detected
+- How it is reported
+- Whether recovery is possible
+- What downstream systems should receive
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -495,7 +541,26 @@ Wait for approval.
 
 ## Objective
 
-Verify the implementation.
+Verify that the extraction capability behaves correctly across the expected range of documents.
+
+Testing should validate the capability—not just the example documents provided by the user.
+
+## Representative Fixtures
+
+Create representative fixtures that reflect the expected production inputs.
+
+Where appropriate, include:
+
+- Typical production documents
+- Different document layouts or templates
+- Different document sources
+- Optional or missing fields
+- Edge cases
+- Invalid or malformed documents
+
+Include user-provided example documents where appropriate, but do not rely on them exclusively.
+
+The fixture set should provide confidence that the capability generalises across the expected document variations.
 
 ## Deliverable
 
@@ -509,11 +574,15 @@ Create:
 Verify:
 
 - Schema validation
+- Required field behaviour
+- Optional field behaviour
+- Validation rules
 - Error handling
+- Consistent extraction across representative document variations
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -521,19 +590,26 @@ Wait for approval.
 
 ## Objective
 
-Measure extraction quality.
+Measure the quality of the extraction capability.
+
+Evaluation verifies that changes improve the capability without introducing regressions.
 
 ## Deliverable
 
-Whenever prompts or extraction logic change:
+Whenever prompts, schemas or extraction logic change:
 
-- Run evaluations
-- Compare against previous results
-- Verify no regressions
+- Run evaluations.
+- Compare against previous results.
+- Identify regressions.
+- Verify that changes improve or maintain extraction quality.
+
+Where possible, evaluate against representative production fixtures rather than isolated examples.
+
+Document any significant findings before deployment.
 
 End your response.
 
-Wait for approval.
+Wait for explicit approval.
 
 ---
 
@@ -541,20 +617,29 @@ Wait for approval.
 
 ## Objective
 
-Prepare the extraction system for deployment.
+Prepare the extraction capability for deployment.
 
 ## Deliverable
 
 Before deployment:
 
-- Review against the engineering rules
-- Version prompts
-- Plan rollout
-- Enable monitoring
+- Review the implementation against the documented engineering rules.
+- Verify that all approved phases have been completed.
+- Version prompts and schemas where appropriate.
+- Plan the deployment strategy.
+- Enable monitoring.
+- Define rollback procedures if required.
+
+Confirm that:
+
+- The implementation matches the approved Extraction Contract.
+- Testing has been completed.
+- Evaluations have been reviewed.
+- Known limitations are documented.
 
 End your response.
 
-Wait for approval before considering the project complete.
+Wait for explicit approval before considering the extraction capability complete.
 
 ---
 
@@ -570,11 +655,13 @@ Explain:
 
 Do not make assumptions.
 
+If resolving the uncertainty requires revisiting an earlier decision, return to the appropriate phase before continuing.
+
 ---
 
 # Completion Checklist
 
-Before considering the project complete, verify:
+Before considering the extraction capability complete, verify:
 
 - Problem understanding approved
 - Task Specification approved
@@ -585,6 +672,9 @@ Before considering the project complete, verify:
 - Engineering rules followed
 - Failure handling designed
 - Validation implemented
-- Tests added
+- Representative fixtures created
+- Automated tests added
+- Edge-case tests completed
+- Failure tests completed
 - Evaluations completed
 - Production readiness reviewed
