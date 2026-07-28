@@ -42,6 +42,20 @@ Before writing any code:
 
 Do not guess missing requirements.
 
+## Clarify Project Decisions
+
+Before implementing, identify any project-level decisions that affect the architecture but are not specified in the requirements or engineering rules.
+
+Examples include:
+
+- Target LLM provider
+- Scope of the implementation (general-purpose vs. task-specific)
+- Testing strategy
+- Deployment constraints
+- Performance or latency requirements
+
+If these decisions cannot be inferred, ask for clarification before proceeding.
+
 ---
 
 ## 2. Design the Extraction
