@@ -79,14 +79,13 @@ Each phase is completed before moving to the next.
 # Repository Structure
 
 ```text
-docs/
-    extraction-engineering-guide.md
+    extraction workflow.md
 
 rules/
     ...
 ```
 
-## `docs/`
+## `extraction workflow`
 
 Contains the end-to-end engineering workflow the AI follows when building an extraction capability.
 
