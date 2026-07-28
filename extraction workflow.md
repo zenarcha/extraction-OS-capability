@@ -196,11 +196,22 @@ Before writing implementation code:
 - Identify downstream workflows.
 - Identify the applicable engineering rules.
 
+  Examples include:
+
+- Data types
+- Enums
+- Currency representation
+- Locale handling
+- Tax modelling
+- Validation rules
+- Nested models
+
 Design the extraction schema from the approved Extraction Contract.
 
 The schema is the contract between the model and the application.
 
 It should support downstream workflows rather than simply mirror the source document.
+
 
 ---
 
