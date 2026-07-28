@@ -1,213 +1,255 @@
-Extraction Engineering Guide
+# Extraction Engineering Guide
 
 Use this guide whenever a task involves:
 
-Information extraction
-Structured outputs
-Classification
-Entity extraction
-Attribute extraction
-Recommendation inputs
-Converting unstructured data into structured data
+* Information extraction
+* Structured outputs
+* Classification
+* Entity extraction
+* Attribute extraction
+* Recommendation inputs
+* Converting unstructured data into structured data
 
-The documents in rules/ are the source of truth for extraction-related engineering decisions.
+The documents in `rules/` are the source of truth for extraction engineering decisions.
 
-Objective
+---
+
+# Objective
 
 Build extraction systems that are:
 
-Reliable
-Structured
-Type-safe
-Production-ready
-Based on documented engineering guidance
-Project Conventions
+* Reliable
+* Structured
+* Type-safe
+* Production-ready
+* Based on documented engineering guidance
+
+---
+
+# Project Conventions
 
 Unless the task specifies otherwise:
 
-Build extraction modules to be provider-agnostic.
-Use Instructor's from_provider().
-Make the provider configurable.
-Do not hardcode a provider.
-Engineering Workflow
+* Build extraction modules to be provider-agnostic.
+* Use Instructor's `from_provider()`.
+* Make the provider configurable.
+* Do not hardcode a provider.
+
+---
+
+# Engineering Workflow
 
 Follow this workflow for every extraction task.
 
-0. Define the Extraction Task
+---
 
-This repository is designed to be reused across different extraction projects. It does not assume what information should be extracted.
+# 1. Define the Extraction Task
 
-If the extraction task has not been fully specified, work with the user to define it before designing the schema or implementing the extractor.
+This repository is designed to be reused across different extraction projects. It does **not** assume what information should be extracted.
 
-Understand the business problem
+If the extraction task has not been been fully defined, do not begin implementation. Work with the user to define the task first.
+
+## Understand the business problem
 
 Ask the user to describe:
 
-What type of document will be processed?
-What business problem are they trying to solve?
-How will the extracted data be used?
-Who or what consumes the extracted data?
+* What type of document will be processed?
+* What business problem are they are trying to solve?
+* How will the extracted data be used?
+* Who or what will consume the extracted data?
 
-The user does not need to provide prompts, schemas or implementation details.
+The user does **not** need to provide prompts, schemas or implementation details.
 
-Design the extraction contract
+## Propose an extraction contract
 
-Based on the user's requirements:
+Based on the business problem:
 
-Propose the fields to extract.
-Explain why each field is useful.
-Identify required and optional fields.
-Propose enums, nested models and validation rules where appropriate.
-Define the extraction scope.
-Provide an example structured output.
+* Recommend the fields to extract.
+* Explain why each field is useful.
+* Identify required and optional fields.
+* Propose enums, nested models and validation rules where appropriate.
+* Define the extraction scope.
+* Provide an example structured output.
 
-Do not assume the proposed schema is final.
+Treat the extraction contract as a proposal.
 
-Review the extraction contract
+Do **not** assume it is final.
 
-Present the proposed extraction contract for approval.
+## Review and approve
+
+Present the proposed extraction contract to the user.
 
 Ask the user to:
 
-Add fields.
-Remove fields.
-Rename fields.
-Modify validation rules.
-Confirm the extraction scope.
+* Add fields.
+* Remove fields.
+* Rename fields.
+* Modify validation rules.
+* Confirm the extraction scope.
 
 Only begin implementation after the extraction contract has been approved.
 
-1. Understand the Problem
+---
+
+# 2. Understand the Requirements
 
 Before writing any code:
 
-Read the requirements carefully.
-Review the approved extraction contract.
-Understand how the extracted data will be used downstream.
-Identify ambiguities or missing requirements.
-Ask clarifying questions before implementing.
-Do not guess missing requirements.
-Clarify Project Decisions
+* Read the project requirements carefully.
+* Review the approved extraction contract.
+* Understand how the extracted data will be used downstream.
+* Identify ambiguities or missing requirements.
+* Ask clarifying questions before implementing.
+* Do not guess missing requirements.
 
-Before implementing, identify any project-level decisions that affect the architecture but are not specified in:
+## Clarify project decisions
 
-The task requirements
-This guide
-The documented engineering rules
+Identify any project-level decisions that are not specified in:
+
+* The task requirements
+* This guide
+* The engineering rules
 
 Examples include:
 
-Target LLM provider
-Scope of the implementation (general-purpose vs. task-specific)
-Testing strategy
-Deployment constraints
-Performance or latency requirements
+* Target LLM provider
+* Scope of the implementation (general-purpose vs. task-specific)
+* Testing strategy
+* Deployment constraints
+* Performance or latency requirements
 
 If these decisions cannot be inferred, ask for clarification before proceeding.
 
-2. Design the Extraction
+---
+
+# 3. Design the Extraction
 
 Before writing prompts or code, determine:
 
-What is the input?
-How will the extracted information be used downstream?
-What decisions or workflows will consume the extracted data?
-What is the required structured output?
-What should the output schema look like?
-Which fields are required?
-Which fields are optional?
-Which engineering rules apply?
+* What is the input?
+* What is the expected structured output?
+* How will the extracted information be used downstream?
+* Which workflows or decisions depend on it?
+* Which engineering rules apply?
 
-The extraction schema is the contract between the model and the application. Design it to support downstream requirements rather than the source document alone, and ensure it reflects the approved extraction contract.
+Design the extraction schema from the approved extraction contract.
 
-3. Choose the Right Approach
+The schema is the contract between the model and the application. It should support downstream workflows rather than simply mirror the source document.
 
-Determine the most appropriate implementation approach based on the requirements and the documented engineering rules.
+---
+
+# 4. Choose the Implementation Approach
+
+Determine the most appropriate implementation approach using the documented engineering rules.
 
 Consider whether the task should use:
 
-Structured Outputs
-Function Calling
-Standard text generation
+* Structured Outputs
+* Function Calling
+* Standard text generation
 
-If multiple approaches are appropriate, explain the trade-offs before choosing one.
+If multiple approaches are appropriate, explain the trade-offs before making a recommendation.
 
-4. Implement
+---
+
+# 5. Implement
 
 While implementing:
 
-Follow the applicable engineering rules.
-Keep prompts, schemas and implementation consistent.
-Reuse existing schemas and components when appropriate.
-Prefer the simplest implementation that satisfies the requirements.
-Do not invent engineering practices that contradict the documented guidance.
-5. Design for Failure
+* Follow the applicable engineering rules.
+* Keep prompts, schemas and implementation consistent.
+* Reuse existing schemas and components where appropriate.
+* Prefer the simplest implementation that satisfies the requirements.
+* Do not introduce engineering practices that contradict the documented guidance.
 
-Assume things can go wrong.
+---
+
+# 6. Design for Failure
+
+Assume the model can fail.
 
 Consider:
 
-Invalid input
-Missing information
-Incomplete input
-Malformed output
-Validation failures
-Model refusals
+* Invalid input
+* Missing information
+* Incomplete input
+* Malformed output
+* Validation failures
+* Model refusals
+
+Design explicit handling for these scenarios.
 
 Do not assume the model always returns valid data.
 
-6. Test
+---
+
+# 7. Test
 
 Before considering the implementation complete:
 
-Create representative fixtures.
-Add automated tests.
-Test edge cases.
-Test failure scenarios.
-Verify validation behaviour.
-7. Evaluate
+* Create representative fixtures.
+* Add automated tests.
+* Test edge cases.
+* Test failure scenarios.
+* Verify schema validation.
+* Verify error handling.
+
+---
+
+# 8. Evaluate
 
 Whenever prompts or extraction logic change:
 
-Run evaluations.
-Compare results with previous behaviour.
-Verify that extraction quality has not regressed.
-8. Prepare for Production
+* Run evaluations.
+* Compare results with previous behaviour.
+* Verify that extraction quality has not regressed.
+
+---
+
+# 9. Prepare for Production
 
 Before deployment:
 
-Review the implementation against the documented engineering rules.
-Ensure prompts are version controlled.
-Plan a safe rollout strategy.
-Ensure monitoring is in place.
-When You're Unsure
+* Review the implementation against the documented engineering rules.
+* Ensure prompts are version controlled.
+* Plan a safe rollout strategy.
+* Ensure monitoring is in place.
+
+---
+
+# When You're Unsure
 
 Stop before implementing.
 
 Explain:
 
-What is uncertain.
-Which engineering rules apply.
-What additional information is needed.
+* What is uncertain.
+* Which engineering rules apply.
+* What additional information is needed.
 
 Do not make assumptions.
 
-Completion Checklist
+---
+
+# Completion Checklist
 
 Before considering the task complete, verify that:
 
-The extraction task has been defined and approved.
-Requirements are understood.
-The output schema is defined.
-The appropriate extraction approach was chosen.
-The relevant engineering rules were followed.
-Failure scenarios are handled.
-Validation is implemented.
-Tests are included.
-Evaluations have been updated if prompts changed.
-Production readiness has been considered.
-Source of Truth
+* The extraction task has been defined and approved.
+* Requirements are understood.
+* The extraction schema is defined.
+* The implementation approach has been justified.
+* The relevant engineering rules have been followed.
+* Failure scenarios have been handled.
+* Validation has been implemented.
+* Tests have been added.
+* Evaluations have been updated where required.
+* Production readiness has been considered.
 
-Consult the documents in rules/ before making extraction-related engineering decisions.
+---
+
+# Source of Truth
+
+Consult the documents in `rules/` before making extraction engineering decisions.
 
 If this guide conflicts with a documented engineering rule, follow the documented engineering rule.
