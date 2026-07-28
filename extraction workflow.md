@@ -157,6 +157,10 @@ Ask the user to:
 
 Do **not** design the schema or begin implementation until the Extraction Contract has been approved.
 
+This phase defines **what** information should be extracted.
+
+Do not decide **how** individual fields should be modelled in the schema until the extraction contract has been approved.
+
 ---
 
 # 4. Confirm the Implementation Scope
