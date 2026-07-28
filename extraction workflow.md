@@ -41,13 +41,15 @@ Unless the task specifies otherwise:
 
 Follow this workflow for every extraction task.
 
-## Workflow Principles
+---
 
-Treat each phase in this workflow as a required checkpoint.
+# Workflow Principles
 
-Complete the current phase before moving to the next.
+Treat each phase as a required checkpoint.
 
-Do not merge phases or skip approval steps, even if you believe you have enough information to continue.
+- Complete the current phase before moving to the next.
+- Do not merge phases.
+- Do not skip approval steps, even if you believe you have enough information to continue.
 
 ---
 
@@ -122,15 +124,6 @@ Document any known constraints, such as:
 - Deployment constraints
 - Regulatory requirements
 
-## Project Decisions
-
-Identify implementation decisions that still require clarification, for example:
-
-- Target LLM provider
-- Implementation scope (prototype, MVP or production-ready)
-- Testing strategy
-- Evaluation strategy
-
 Present the Extraction Task Specification to the user for review.
 
 Do **not** continue until it has been approved.
@@ -166,16 +159,38 @@ Do **not** design the schema or begin implementation until the Extraction Contra
 
 ---
 
-# 4. Design the Extraction
+# 4. Confirm the Implementation Scope
+
+Before implementation begins, confirm the expected deliverable.
+
+Examples include:
+
+- Prototype
+- MVP
+- Production-ready implementation
+
+Clarify any implementation decisions that affect the build, such as:
+
+- Target LLM provider
+- Testing strategy
+- Evaluation strategy
+- Deployment constraints
+
+Only continue once the implementation scope has been agreed.
+
+---
+
+# 5. Design the Extraction
 
 Before writing implementation code:
 
 - Review the approved Extraction Task Specification.
 - Review the approved Extraction Contract.
+- Review the agreed implementation scope.
 - Determine the input format.
 - Determine the expected structured output.
 - Identify downstream workflows.
-- Identify applicable engineering rules.
+- Identify the applicable engineering rules.
 
 Design the extraction schema from the approved Extraction Contract.
 
@@ -185,7 +200,7 @@ It should support downstream workflows rather than simply mirror the source docu
 
 ---
 
-# 5. Choose the Implementation Approach
+# 6. Choose the Implementation Approach
 
 Determine the most appropriate implementation approach using the documented engineering rules.
 
@@ -199,7 +214,7 @@ If multiple approaches are appropriate, explain the trade-offs before making a r
 
 ---
 
-# 6. Implement
+# 7. Implement
 
 While implementing:
 
@@ -211,7 +226,7 @@ While implementing:
 
 ---
 
-# 7. Design for Failure
+# 8. Design for Failure
 
 Assume the model can fail.
 
@@ -228,7 +243,7 @@ Do not assume the model always returns valid data.
 
 ---
 
-# 8. Test
+# 9. Test
 
 Before considering the implementation complete:
 
@@ -241,7 +256,7 @@ Before considering the implementation complete:
 
 ---
 
-# 9. Evaluate
+# 10. Evaluate
 
 Whenever prompts or extraction logic change:
 
@@ -251,7 +266,7 @@ Whenever prompts or extraction logic change:
 
 ---
 
-# 10. Prepare for Production
+# 11. Prepare for Production
 
 Before deployment:
 
@@ -283,6 +298,7 @@ Before considering the task complete, verify that:
 - The user's problem has been understood.
 - An Extraction Task Specification has been created and approved.
 - An Extraction Contract has been created and approved.
+- The implementation scope has been agreed.
 - The extraction schema has been defined.
 - The implementation approach has been justified.
 - The relevant engineering rules have been followed.
