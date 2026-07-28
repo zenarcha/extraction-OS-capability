@@ -1,4 +1,4 @@
-# Behaviour Validation: README + Rules
+# Behaviour Validation
 
 ## Objective
 
